@@ -63,7 +63,7 @@ def get_all_flashcards(request, collection_id):
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
-def add_flashcard(request):
+def add_flashcard(request, collection_id):
     serializer = FlashcardSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save(user=request.user)
@@ -72,7 +72,7 @@ def add_flashcard(request):
 
 @api_view(['DELETE'])
 @permission_classes([AllowAny])
-def delete_flashcard(request, flashcard_id):
+def delete_flashcard(request, collection_id, flashcard_id):
     flashcard = Flashcard.objects.get(id=flashcard_id)
     if request.user.id == flashcard.user.id:
         serializer = FlashcardSerializer(flashcard, many=False) #will display deleted flashcard
@@ -83,7 +83,7 @@ def delete_flashcard(request, flashcard_id):
 
 @api_view(['PUT'])
 @permission_classes([AllowAny])
-def update_flashcard(request, flashcard_id):
+def update_flashcard(request, collection_id, flashcard_id):
     flashcard = Flashcard.objects.get(id=flashcard_id)
     serializer = FlashcardSerializer(flashcard, data=request.data)
     if serializer.is_valid():
