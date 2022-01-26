@@ -1,0 +1,376 @@
+{
+	"info": {
+		"_postman_id": "db64cdb3-d591-4647-b123-9819d00f4160",
+		"name": "Flashcards_API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Register_User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"email\": \"test@gmail.com\",\r\n\"first_name\": \"Audrey\",\r\n\"last_name\": \"Schmidt\",\r\n\"password\": \"Password1234!\",\r\n\"username\": \"ASchmidt\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/auth/register/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"register",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login_User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"ASchmidt\",\r\n    \"password\": \"Password1234!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/auth/login/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Collections",
+			"item": [
+				{
+					"name": "Get_All_Collections",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/flashcard/allcollections/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"flashcard",
+								"allcollections",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add_Collection",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQ0MDgxMTAyLCJpYXQiOjE2NDMyMTcxMDIsImp0aSI6ImNkNTQ2MmM0NDA2NzQ5ODRhNzcwOTI3ZjZlMjA5NWI2IiwidXNlcl9pZCI6Mn0.xXPHtH8YftnxCoM5BrkYBAgzdZtBPpIJt0vMG7RufPA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Testing for edit\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/flashcard/addcollection/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"flashcard",
+								"addcollection",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete_Collection",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQ0MDgxMTAyLCJpYXQiOjE2NDMyMTcxMDIsImp0aSI6ImNkNTQ2MmM0NDA2NzQ5ODRhNzcwOTI3ZjZlMjA5NWI2IiwidXNlcl9pZCI6Mn0.xXPHtH8YftnxCoM5BrkYBAgzdZtBPpIJt0vMG7RufPA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/flashcard/deletecollection/3/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"flashcard",
+								"deletecollection",
+								"3",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit_Collection",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQ0MDgxMTAyLCJpYXQiOjE2NDMyMTcxMDIsImp0aSI6ImNkNTQ2MmM0NDA2NzQ5ODRhNzcwOTI3ZjZlMjA5NWI2IiwidXNlcl9pZCI6Mn0.xXPHtH8YftnxCoM5BrkYBAgzdZtBPpIJt0vMG7RufPA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Testing for edit - I EDITED THIS\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/flashcard/editcollection/4/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"flashcard",
+								"editcollection",
+								"4",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Flashcards",
+			"item": [
+				{
+					"name": "Get_All_Flashcards",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/flashcard/allflashcards/1/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"flashcard",
+								"allflashcards",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add_Flashcard",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQ0MDgxMTAyLCJpYXQiOjE2NDMyMTcxMDIsImp0aSI6ImNkNTQ2MmM0NDA2NzQ5ODRhNzcwOTI3ZjZlMjA5NWI2IiwidXNlcl9pZCI6Mn0.xXPHtH8YftnxCoM5BrkYBAgzdZtBPpIJt0vMG7RufPA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"term\": \"Testing for edit\",\r\n    \"definition\": \"Testing for edit\",\r\n    \"collection\": 1\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/flashcard/addflashcard/1/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"flashcard",
+								"addflashcard",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete_Flashcard",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQ0MDgxMTAyLCJpYXQiOjE2NDMyMTcxMDIsImp0aSI6ImNkNTQ2MmM0NDA2NzQ5ODRhNzcwOTI3ZjZlMjA5NWI2IiwidXNlcl9pZCI6Mn0.xXPHtH8YftnxCoM5BrkYBAgzdZtBPpIJt0vMG7RufPA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/flashcard/deleteflashcard/collection/1/flashcard/5/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"flashcard",
+								"deleteflashcard",
+								"collection",
+								"1",
+								"flashcard",
+								"5",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit_Flashcard",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQ0MDgxMTAyLCJpYXQiOjE2NDMyMTcxMDIsImp0aSI6ImNkNTQ2MmM0NDA2NzQ5ODRhNzcwOTI3ZjZlMjA5NWI2IiwidXNlcl9pZCI6Mn0.xXPHtH8YftnxCoM5BrkYBAgzdZtBPpIJt0vMG7RufPA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"term\": \"Testing for edit - I EDITED THIS\",\r\n    \"definition\": \"Testing for edit - I EDITED THIS\",\r\n    \"collection\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/flashcard/editflashcard/collection/1/flashcard/6/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"flashcard",
+								"editflashcard",
+								"collection",
+								"1",
+								"flashcard",
+								"6",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

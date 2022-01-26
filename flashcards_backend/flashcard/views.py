@@ -13,8 +13,6 @@ from django.contrib.auth.models import User
 from .serializers import UserSerializer
 
 # Create your views here.
-#!all temporarily allow any
-
 #collections
 @api_view(['GET'])
 @permission_classes([AllowAny])
@@ -24,7 +22,7 @@ def get_all_collections(request):
     return Response(serializer.data)
 
 @api_view(['POST'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def add_collection(request):
     serializer = CollectionSerializer(data=request.data)
     if serializer.is_valid():
@@ -33,7 +31,7 @@ def add_collection(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['DELETE'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def delete_collection(request, collection_id):
     collection = Collection.objects.get(id=collection_id)
     if request.user.id == collection.user.id:
@@ -44,14 +42,17 @@ def delete_collection(request, collection_id):
         return Response(status=status.HTTP_401_UNAUTHORIZED)
 
 @api_view(['PUT'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def update_collection(request, collection_id):
     collection = Collection.objects.get(id=collection_id)
-    serializer = CollectionSerializer(collection, data=request.data)
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    if request.user.id == collection.user.id:
+        serializer = CollectionSerializer(collection, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        return Response(status=status.HTTP_401_UNAUTHORIZED)
 
 #flashcards
 @api_view(['GET'])
@@ -62,7 +63,7 @@ def get_all_flashcards(request, collection_id):
     return Response(serializer.data)
 
 @api_view(['POST'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def add_flashcard(request, collection_id):
     serializer = FlashcardSerializer(data=request.data)
     if serializer.is_valid():
@@ -71,7 +72,7 @@ def add_flashcard(request, collection_id):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['DELETE'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def delete_flashcard(request, collection_id, flashcard_id):
     flashcard = Flashcard.objects.get(id=flashcard_id)
     if request.user.id == flashcard.user.id:
@@ -82,11 +83,14 @@ def delete_flashcard(request, collection_id, flashcard_id):
         return Response(status=status.HTTP_401_UNAUTHORIZED)
 
 @api_view(['PUT'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def update_flashcard(request, collection_id, flashcard_id):
     flashcard = Flashcard.objects.get(id=flashcard_id)
-    serializer = FlashcardSerializer(flashcard, data=request.data)
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    if request.user.id == flashcard.user.id:
+        serializer = FlashcardSerializer(flashcard, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        return Response(status=status.HTTP_401_UNAUTHORIZED)
