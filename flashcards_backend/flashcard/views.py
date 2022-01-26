@@ -13,6 +13,14 @@ from django.contrib.auth.models import User
 from .serializers import UserSerializer
 
 # Create your views here.
+#get user info
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_user(request, user_id):
+    user = User.objects.get(id=user_id)
+    serializer = UserSerializer(user, many=False)
+    return Response(serializer.data)
+
 #collections
 @api_view(['GET'])
 @permission_classes([AllowAny])

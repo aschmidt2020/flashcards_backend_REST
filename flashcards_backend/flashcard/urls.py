@@ -2,6 +2,7 @@ from django.urls import path
 from flashcard import views
 
 urlpatterns = [
+    path('user/<int:user_id>/', views.get_user),
     path('allcollections/', views.get_all_collections),
     path('addcollection/', views.add_collection),
     path('deletecollection/<int:collection_id>/', views.delete_collection),
